@@ -40,6 +40,7 @@ public class Home {
 	private ObjectOutputStream write;
 	private ObjectInputStream read;
 	private JTextField idApagarField;
+	private final String fileLocation = "C:\\siAdmin\\armazenamento/db.dat";
 
 	/**
 	 * Launch the application.
@@ -62,15 +63,8 @@ public class Home {
 	 */
 	public Home() {
 		
-		
-		/*
-		registro = new RegProduto();
-		registro.addProduto("Teste", "teste de produto", 23.45);
-		registro.addProduto("Teste2", "teste de produto2", 67.89);
-		*/
-		
 		try {
-			fileRead = new FileInputStream("C:\\Users\\alpsi\\OneDrive\\Área de Trabalho\\siAdmin\\armazenamento/db.dat");
+			fileRead = new FileInputStream(fileLocation);
 			read = new ObjectInputStream(fileRead);
 			registro = (RegProduto) read.readObject();
 			read.close();
@@ -218,7 +212,7 @@ public class Home {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					fileWrite = new FileOutputStream("C:\\Users\\alpsi\\OneDrive\\Área de Trabalho\\siAdmin\\armazenamento/db.dat");
+					fileWrite = new FileOutputStream(fileLocation);
 					write = new ObjectOutputStream(fileWrite);
 					write.writeObject(registro);
 					write.flush();
@@ -266,8 +260,7 @@ public class Home {
 						JOptionPane.showMessageDialog(null, "Remoção de produto: Sucesso.");
 					} else {
 						JOptionPane.showMessageDialog(null, "Erro! Produto não encontrado.");
-					}
-					
+					}				
 				}
 				
 				
